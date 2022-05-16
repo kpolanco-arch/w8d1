@@ -23,10 +23,6 @@ require 'rack'
 # end
 
 
-# Rack::Server.start(
-#   app: app,
-#   Port: 3000
-# )
 
 class MyController 
 
@@ -34,12 +30,6 @@ class MyController
         @req = req
         @res = res
     end
-
-    # def redirect_to(url)
-    #     @res.status = 302
-    #     @res["Location"] = url
-    #     nil
-    # end
 
     def my_render(content, content_type = "text/html")
         @res.write(content)
@@ -60,3 +50,9 @@ app = Proc.new do |env|
     MyController.new(req, res).execute
     res.finish
 end
+
+
+Rack::Server.start(
+  app: app,
+  Port: 3000
+)
